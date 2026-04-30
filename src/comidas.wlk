@@ -18,7 +18,9 @@ object manzana {
 }
 
 object alpiste {
-
+	method position() = game.at(3, 3)
+	method image() = "alpiste.png"
+	
 	method energiaQueOtorga() {
 		return 20
 	} 

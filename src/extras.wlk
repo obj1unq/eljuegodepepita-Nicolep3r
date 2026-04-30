@@ -5,7 +5,7 @@ object silvestre {
     //  global
     const presa = pepita
     //posicion inicial
-    var property position = game.at(0,0)
+    var property position = game.at(3,0)
     method image() = "silvestre.png"
 
 

@@ -19,7 +19,7 @@ object pepita {
 	// var posicionX = position.x()
 
 	method estado() {
-		return if(self.atrapada()) "-gris" else ""
+		return if(self.atrapada() || self.cansada()) "-gris" else ""
 	}
 
 	//Cuando silvestre agarra a pepita
@@ -44,17 +44,23 @@ object pepita {
 
 	method mover(direccion) {
 		const oldPosition = position
-		position = direccion.siguiente(position)
-		if(position != oldPosition){
-			self.volar(1)
-		}
+		position = self.siguientePosicion(direccion)
 
+		if(position != oldPosition) self.volar(1)
+	}
+
+	method siguientePosicion(direccion) {
+        return if(!self.cansada()) direccion.siguiente(position)
+    }
+	
+	method cansada(){
+		const energiaNecesariaPorKm = 9
+		return energia < energiaNecesariaPorKm
 	}
 //Si la (x,y) cambia lo hacemos volar, si no cambia es porque no puede volar mas arriba  y no consume energia 
 
 	method volar(kms) {
-		// energia = energia - 9 * kms 
-		energia = energia - 10 - kms
+		energia = energia - (9 * kms) 
 	}
 	
 	method energia() {

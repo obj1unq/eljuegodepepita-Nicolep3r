@@ -24,6 +24,6 @@ object arriba {
 object abajo {
     method siguiente(posicion) =
        if (posicion.y() > 0) 
-                posicion.right(1) 
+                posicion.down(1) 
             else posicion
 }
