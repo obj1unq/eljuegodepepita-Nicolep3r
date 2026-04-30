@@ -1,10 +1,15 @@
 import wollok.game.*
 import pepita.*
 object silvestre {
+    //Hago referencia a que presa = pepita para poder usarla, solo puedo llamarla como atributo, parametro o 
+    //  global
     const presa = pepita
-
-    var property position = game.at(2,0)
+    //posicion inicial
+    var property position = game.at(0,0)
     method image() = "silvestre.png"
+
+
+    //vuelvo a definir la posiicon de silvestre
     method position() = game.at(self.x(), 0)
     method x(){
         const xPresa = presa.positionX()

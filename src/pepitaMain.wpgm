@@ -8,7 +8,7 @@ import pepita.*
 
 program PepitaGame {
 	// pepita.init()
-	game.clear()
+	// game.clear()
 	game.title("Pepita")
 	game.height(10)
 	game.width(10)
@@ -36,7 +36,7 @@ program PepitaGame {
 	// game.onCollideDo(pepita, { comida => pepita.comer(comida)})
 	game.addVisual(silvestre)
 	game.addVisualCharacter(pepita)
-	game.onTick(1000, "gravedad", {"bloque q manda mensaje a pepita"} )
+	// game.onTick(1000, "gravedad", {"bloque q manda mensaje a pepita"} )
 	game.addVisual(manzana)
 	
 

@@ -2,12 +2,13 @@ import wollok.game.*
 import extras.*
 import direcciones.*
 object pepita {
-	var perseguidor = silvestre
-	var property position = game.at(0,0)
+	const perseguidor = silvestre
+	var property position = game.at(0,2)
 	var energia = 100
+	method text() = "\n\n\n" + energia
 	// var estado = true
 
-	method text() = "/n/n" + energia
+	// method text() = "/n/n/n" + energia
 	// method init() {
 	//   estado = viva
 	//   position = game.at(0,0)
@@ -21,8 +22,7 @@ object pepita {
 		return if(self.atrapada()) "-gris" else ""
 	}
 
-	// return 2 + if(true) 1 else 2
-
+	//Cuando silvestre agarra a pepita
 	method atrapada() = position == perseguidor.position() 
 	//devuelve un booleano
 	
@@ -43,17 +43,18 @@ object pepita {
 //Averiguar sobre try catch
 
 	method mover(direccion) {
-		position = direccion.siguiente(position)
 		const oldPosition = position
+		position = direccion.siguiente(position)
 		if(position != oldPosition){
 			self.volar(1)
 		}
 
 	}
-
+//Si la (x,y) cambia lo hacemos volar, si no cambia es porque no puede volar mas arriba  y no consume energia 
 
 	method volar(kms) {
-		energia = energia - 9 * kms 
+		// energia = energia - 9 * kms 
+		energia = energia - 10 - kms
 	}
 	
 	method energia() {
