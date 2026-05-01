@@ -1,0 +1,47 @@
+import wollok.game.*
+import comidas.*
+// import niveles.*
+import extras.*
+import direcciones.*
+import pepita.*
+
+
+program PepitaGame {
+	// pepita.init()
+	// game.clear()
+	game.title("Pepita")
+	game.height(10)
+	game.width(15)
+	game.boardGround("fondo2.jpg")
+
+//keyboard.up --> up puede ser cualquier tecla, onPress es lo que va a hacer cuando se tque, es el evento
+//Hace un selferro, la excepcion aborta la del metodo 
+
+
+	keyboard.up().onPressDo ({pepita.mover(arriba)})
+    keyboard.down().onPressDo ({pepita.mover(abajo)})
+    keyboard.right().onPressDo ({pepita.mover(derecha)})
+    keyboard.left().onPressDo ({pepita.mover(izquierda)})
+
+	keyboard.c().onPressDo({pepita.comer(game.uniqueCollider(pepita))})
+		// { try {
+		// 	pepita.comer(game.uniqueCollider(pepita))
+		// } catch e : wollok.Lang.Exception{
+		// 	console.println("fallaste")
+		// } USARLO PARA MOVER LA TECLA, SI LO HACE BIEN Y SI NO TEXT DE EXCEPCION 
+		// }) evitar la corrupcion de retorno 
+		//self.error
+		//b = { nombre => consolte.print( "" )}, todo los bloques pueden ser consulta u orden
+		//suma = { 1+2}
+	// game.onCollideDo(pepita, { comida => pepita.comer(comida)})
+	// game.onTick(1000, "gravedad", {"bloque q manda mensaje a pepita"} )
+	game.addVisual(manzana)
+	game.addVisual(alpiste)
+
+
+	game.addVisual(silvestre)
+	game.addVisual(pepita)
+	
+
+	game.start()
+}
