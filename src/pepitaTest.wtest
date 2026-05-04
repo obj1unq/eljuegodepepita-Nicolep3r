@@ -11,10 +11,18 @@ describe "Tests de Pepita" {
 
 	test "Al volar pepita pierde energia" {
 		 pepita.volar(1)
-		assert.equals(89, pepita.energia())
+		assert.equals(91, pepita.energia())
 	}
 
 
+	test "Pepita esta cansada si tiene menos de 9 de energia"{
+	 		pepita.volar(20)
+	 	 assert.that(pepita.cansada())
+		}
 
+	test "Pepita tiene la imagen gris al quedarse sin energia"{
+		pepita.volar(11)
+		assert.equals("pepita-gris.png", pepita.image())
+	}
 }
 

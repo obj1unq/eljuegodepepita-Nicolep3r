@@ -34,10 +34,9 @@ program PepitaGame {
 		//b = { nombre => consolte.print( "" )}, todo los bloques pueden ser consulta u orden
 		//suma = { 1+2}
 	// game.onCollideDo(pepita, { comida => pepita.comer(comida)})
-	// game.onTick(1000, "gravedad", {"bloque q manda mensaje a pepita"} )
 	game.addVisual(manzana)
 	game.addVisual(alpiste)
-
+    game.onTick(800, "gravedad", {pepita.descender()})
 
 	game.addVisual(silvestre)
 	game.addVisual(pepita)

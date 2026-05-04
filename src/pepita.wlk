@@ -18,6 +18,9 @@ object pepita {
 	method atrapada() = position == perseguidor.position() 
 	//devuelve un booleano
 	
+	method descender(){
+		position = abajo.siguiente(position)
+	}
 
 	method positionX(){
 		return position.x()
@@ -33,10 +36,9 @@ object pepita {
 		if(!(self.atrapada() || self.cansada())){
 			position = direccion.siguiente(position)
 			self.volar(1)
+		}else{
+			game.stop()
 		}
-		// }else{
-		// 	game.stop()
-		// }
 		// const oldPosition = position
 		// // posicion x,y
 
