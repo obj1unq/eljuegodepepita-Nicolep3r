@@ -1,6 +1,32 @@
-// import wollok.game.*
-// import pepita.*
-// import direcciones.*
+import wollok.game.*
+import pepita.*
+import direcciones.*
+
+
+
+object descansada {
+    method image() = "pepita.png" 
+
+    method mover(direccion, pepita) {
+        pepita.volar(direccion)
+        if (pepita.cansada()) {
+            pepita.cambiarEstado(cansada)
+        }
+    }
+}
+
+object cansada {
+    method image() = "pepita-gris.png"
+
+    method mover(direccion, pepita) {
+        game.stop()
+    }
+}
+
+
+
+
+
 // object viva {
 //   method image() = "pepita.png" 
 
@@ -12,9 +38,6 @@
 // 	    }
 //     }
 
-//     method volar(pepita, kms){
-// 		pepita.energia(pepita.energia() - (9 * kms))
-// 	}
 
 //     method comer(pepita,comida) {
 // 		pepita.energia(pepita.energia() + comida.energiaQueOtorga())

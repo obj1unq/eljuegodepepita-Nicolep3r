@@ -1,19 +1,17 @@
 import wollok.game.*
 import extras.*
 import direcciones.*
+import estado.*
 object pepita {
 	const perseguidor = silvestre
 	var property position = game.at(0,2)
 	var energia = 100
+	var energiaPorkm = 9
+	var estado = descansada
 
 	method text() = "\n\n\n" + energia
-	method image() = "pepita" + self.estado() + ".png" 
-
-
-	method estado() {
-		return if(self.atrapada() || self.cansada()) "-gris" else ""
-	}
-
+	method image() = self.estado().image()
+	method estado() = estado
 
 	method atrapada() = position == perseguidor.position() 
 	//devuelve un booleano
@@ -31,29 +29,27 @@ object pepita {
 		game.removeVisual(comida)
 	}
 
-
 	method mover(direccion) {
-		if(!(self.atrapada() || self.cansada())){
-			position = direccion.siguiente(position)
-			self.volar(1)
-		}else{
-			game.stop()
-		}
-		// const oldPosition = position
-		// // posicion x,y
-
-		// if(position != oldPosition) 
+		self.estado().mover(direccion, self)
 	}
 
-	
+	method cambiarEstado(_estado) {
+	  	estado = _estado
+	}
+
 	method cansada(){
 		const energiaNecesariaPorKm = 9
 		return energia < energiaNecesariaPorKm
 	}
 
 
-	method volar(kms) {
-		energia = energia - (9 * kms) 
+	method volar(direccion) {
+		const siguientePosicion = direccion.siguiente(position)
+
+		if (position != siguientePosicion) {
+			energia = energia - energiaPorkm 
+			position = siguientePosicion
+		}
 	}
 	
 	method energia() {
