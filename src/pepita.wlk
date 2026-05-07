@@ -2,9 +2,10 @@ import wollok.game.*
 import extras.*
 import direcciones.*
 import estado.*
+import muros.*
 object pepita {
 	const perseguidor = silvestre
-	var property position = game.at(0,2)
+	var property position = game.at(3,1)
 	var energia = 100
 	var energiaPorkm = 9
 	var estado = descansada
@@ -24,9 +25,21 @@ object pepita {
 		return position.x()
 	} 
 
+	method morir() {
+	  estado = muerta
+	  game.stop()
+	}
 	method comer(comida) {
+		// if(not encontrarComida()){
+		// 	self.error()	
+		// }
+		try{
 		energia = energia + comida.energiaQueOtorga()
 		game.removeVisual(comida)
+		}catch e:Exception{
+			console.println("fallaste")
+		}
+
 	}
 
 	method mover(direccion) {
@@ -46,10 +59,14 @@ object pepita {
 	method volar(direccion) {
 		const siguientePosicion = direccion.siguiente(position)
 
-		if (position != siguientePosicion) {
+		if (position != siguientePosicion && !self.hayMuro(direccion)) {
 			energia = energia - energiaPorkm 
 			position = siguientePosicion
 		}
+	}
+
+	method hayMuro(direccion) {
+	  return direccion.siguiente(position) == muro.position()
 	}
 	
 	method energia() {

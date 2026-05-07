@@ -25,7 +25,11 @@ object cansada {
 
 
 
+object muerta {
+  method image() = "pepita-gris.png"
 
+  
+}
 
 // object viva {
 //   method image() = "pepita.png" 

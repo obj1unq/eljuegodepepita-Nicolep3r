@@ -4,6 +4,7 @@ import comidas.*
 import extras.*
 import direcciones.*
 import pepita.*
+import muros.*
 
 
 program PepitaGame {
@@ -14,16 +15,29 @@ program PepitaGame {
 	game.width(15)
 	game.boardGround("fondo2.jpg")
 
-//keyboard.up --> up puede ser cualquier tecla, onPress es lo que va a hacer cuando se tque, es el evento
-//Hace un selferro, la excepcion aborta la del metodo 
-
-
 	keyboard.up().onPressDo ({pepita.mover(arriba)})
     keyboard.down().onPressDo ({pepita.mover(abajo)})
     keyboard.right().onPressDo ({pepita.mover(derecha)})
     keyboard.left().onPressDo ({pepita.mover(izquierda)})
+	
 
-	keyboard.c().onPressDo({pepita.comer(game.uniqueCollider(pepita))})
+	game.addVisual(manzana)
+	game.addVisual(alpiste)
+    game.onTick(8000, "gravedad", {pepita.descender()})
+
+	game.onCollideDo(silvestre, { alguien => alguien.morir() })
+	game.onCollideDo(pepita, { comida =>  try {pepita.comer(comida)} catch e : Exception {console.println("")} })
+
+
+
+	game.addVisual(silvestre)
+	game.addVisual(pepita)
+	game.addVisual(muro)
+
+	game.start()
+}
+
+// keyboard.c().onPressDo({pepita.comer(game.uniqueCollider(pepita))})
 		// { try {
 		// 	pepita.comer(game.uniqueCollider(pepita))
 		// } catch e : wollok.Lang.Exception{
@@ -34,13 +48,8 @@ program PepitaGame {
 		//b = { nombre => consolte.print( "" )}, todo los bloques pueden ser consulta u orden
 		//suma = { 1+2}
 	// game.onCollideDo(pepita, { comida => pepita.comer(comida)})
-	game.addVisual(manzana)
-	game.addVisual(alpiste)
-    game.onTick(800, "gravedad", {pepita.descender()})
-
-	game.addVisual(silvestre)
-	game.addVisual(pepita)
-	
-
-	game.start()
-}
+	// game.onCollideDo(pepita, { comida => pepita.comer(comida) })
+	// 	pepita.comer(game.uniqueCollider(pepita))
+	// 	 } catch e : wollok.Lang.Exception{
+	// 	 	console.println("fallaste")
+	// 	} 
