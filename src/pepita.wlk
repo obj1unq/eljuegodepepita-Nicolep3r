@@ -26,21 +26,23 @@ object pepita {
 	} 
 
 	method morir() {
-	  estado = muerta
-	  game.stop()
-	}
+        estado = muerta 
+        game.say(self, "¡PERDÍ!")
+        game.schedule(2000, { => game.stop() })
+    }
+
+    method ganar() {
+        game.say(self, "¡GANE!")
+        game.schedule(2000, { => game.stop() })
+    }
+
+
 	method comer(comida) {
-		// if(not encontrarComida()){
-		// 	self.error()	
-		// }
-		try{
 		energia = energia + comida.energiaQueOtorga()
 		game.removeVisual(comida)
-		}catch e:Exception{
-			console.println("fallaste")
-		}
-
 	}
+
+
 
 	method mover(direccion) {
 		self.estado().mover(direccion, self)
